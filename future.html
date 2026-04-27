@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Future Applications — AWS Cloud</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+    --cyan:#00eaff;
+    --magenta:#ff00ff;
+    --purple:#a020f0;
+    --gold:#ffd700;
+    --green:#00ff88;
+    --bg:#050816;
+    --glass:rgba(255,255,255,0.04);
+    --border:rgba(160,32,240,0.25);
+}
+body{
+    font-family:'Poppins',sans-serif;
+    background:var(--bg);
+    color:white;
+    min-height:100vh;
+    cursor:none;
+    overflow-x:hidden;
+}
+.video-bg{
+    position:fixed;top:0;left:0;
+    width:100%;height:100%;
+    z-index:0;overflow:hidden;
+}
+.video-bg video{
+    width:100%;height:100%;
+    object-fit:cover;opacity:0.2;
+}
+.video-overlay{
+    position:fixed;top:0;left:0;
+    width:100%;height:100%;
+    background:radial-gradient(circle at 80% 20%, rgba(30,10,50,0.65), rgba(5,8,22,0.9));
+    z-index:1;
+}
+.page{
+    position:relative;z-index:2;
+    max-width:1100px;
+    margin:0 auto;
+    padding:60px 40px 100px;
+}
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:60px;
+    padding-bottom:24px;
+    border-bottom:1px solid var(--border);
+}
+.logo{
+    font-family:'Playfair Display',serif;
+    font-size:20px;
+    background:linear-gradient(90deg,var(--purple),var(--cyan));
+    -webkit-background-clip:text;
+    color:transparent;
+    font-weight:900;
+}
+.back-btn{
+    padding:10px 28px;
+    font-family:'Poppins',sans-serif;
+    font-size:13px;
+    font-weight:600;
+    border-radius:30px;
+    border:1px solid var(--border);
+    background:rgba(160,32,240,0.06);
+    color:var(--purple);
+    cursor:pointer;
+    text-decoration:none;
+    transition:0.3s;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    backdrop-filter:blur(8px);
+}
+.back-btn:hover{
+    background:rgba(160,32,240,0.12);
+    border-color:var(--purple);
+    box-shadow:0 0 20px rgba(160,32,240,0.3);
+    transform:translateX(-3px);
+}
+.hero{text-align:center;margin-bottom:70px;}
+.hero-badge{
+    display:inline-block;
+    padding:6px 20px;
+    border:1px solid rgba(160,32,240,0.3);
+    border-radius:30px;
+    font-size:11px;
+    color:var(--purple);
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:22px;
+    background:rgba(160,32,240,0.06);
+}
+.hero h1{
+    font-family:'Playfair Display',serif;
+    font-size:56px;
+    font-weight:900;
+    line-height:1.15;
+    background:linear-gradient(130deg,#ffffff 20%,var(--purple) 55%,var(--cyan));
+    -webkit-background-clip:text;
+    color:transparent;
+    margin-bottom:22px;
+}
+.hero p{
+    max-width:700px;margin:0 auto;
+    color:#8a7acc;font-size:16px;
+    line-height:1.9;font-weight:300;
+}
+.section-title{
+    font-family:'Playfair Display',serif;
+    font-size:30px;font-weight:700;
+    background:linear-gradient(90deg,var(--purple),var(--cyan));
+    -webkit-background-clip:text;color:transparent;
+    margin-bottom:24px;
+}
+.section-text{
+    color:#8a7acc;font-size:15px;
+    line-height:1.9;font-weight:300;margin-bottom:16px;
+}
+/* FUTURE DOMAINS - LARGE CARDS */
+.domain-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:28px;
+    margin:36px 0 60px;
+}
+.domain-card{
+    background:var(--glass);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:36px 32px;
+    backdrop-filter:blur(12px);
+    transition:0.3s;
+    position:relative;
+    overflow:hidden;
+}
+.domain-card::after{
+    content:'';
+    position:absolute;
+    bottom:0;right:0;
+    width:120px;height:120px;
+    border-radius:50%;
+    opacity:0.04;
+    transition:0.3s;
+}
+.domain-card:nth-child(1)::after{background:var(--cyan);}
+.domain-card:nth-child(2)::after{background:var(--magenta);}
+.domain-card:nth-child(3)::after{background:var(--gold);}
+.domain-card:nth-child(4)::after{background:var(--green);}
+.domain-card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(160,32,240,0.5);
+    box-shadow:0 12px 50px rgba(160,32,240,0.15);
+}
+.domain-card:hover::after{opacity:0.1;width:160px;height:160px;}
+.domain-icon{
+    font-size:40px;margin-bottom:16px;
+    display:block;
+    filter:drop-shadow(0 0 10px currentColor);
+}
+.domain-card h3{
+    font-family:'Playfair Display',serif;
+    font-size:22px;font-weight:700;
+    color:white;margin-bottom:12px;
+}
+.domain-card .tag{
+    font-size:10px;letter-spacing:2px;
+    text-transform:uppercase;
+    padding:4px 12px;
+    border-radius:20px;
+    margin-bottom:14px;
+    display:inline-block;
+}
+.tag-ai{background:rgba(0,234,255,0.1);color:var(--cyan);border:1px solid rgba(0,234,255,0.2);}
+.tag-health{background:rgba(255,0,255,0.1);color:var(--magenta);border:1px solid rgba(255,0,255,0.2);}
+.tag-iot{background:rgba(255,215,0,0.1);color:var(--gold);border:1px solid rgba(255,215,0,0.2);}
+.tag-edge{background:rgba(0,255,136,0.1);color:var(--green);border:1px solid rgba(0,255,136,0.2);}
+.tag-quantum{background:rgba(160,32,240,0.15);color:#d070ff;border:1px solid rgba(160,32,240,0.3);}
+.tag-space{background:rgba(100,149,237,0.1);color:#6495ed;border:1px solid rgba(100,149,237,0.25);}
+.domain-card p{
+    font-size:14px;color:#7065a0;
+    line-height:1.8;font-weight:300;
+    margin-bottom:16px;
+}
+.domain-card ul{list-style:none;padding:0;}
+.domain-card ul li{
+    font-size:13px;color:#5a5080;
+    padding:6px 0;
+    border-bottom:1px solid rgba(255,255,255,0.04);
+    display:flex;align-items:center;gap:10px;
+    font-weight:300;
+}
+.domain-card ul li:last-child{border-bottom:none;}
+.domain-card ul li::before{
+    content:'▸';color:var(--purple);font-size:10px;flex-shrink:0;
+}
+/* TIMELINE */
+.timeline{
+    position:relative;
+    margin:36px 0 60px;
+    padding-left:32px;
+}
+.timeline::before{
+    content:'';position:absolute;
+    left:0;top:0;bottom:0;width:2px;
+    background:linear-gradient(180deg,var(--purple),var(--cyan),transparent);
+}
+.t-item{
+    position:relative;
+    margin-bottom:40px;
+    padding-left:28px;
+}
+.t-item::before{
+    content:'';
+    position:absolute;left:-7px;top:6px;
+    width:14px;height:14px;
+    border-radius:50%;
+    background:var(--purple);
+    box-shadow:0 0 15px var(--purple);
+    border:2px solid var(--bg);
+}
+.t-year{
+    font-size:11px;color:var(--purple);
+    letter-spacing:2px;text-transform:uppercase;
+    margin-bottom:6px;font-weight:600;
+}
+.t-item h3{font-size:17px;color:white;margin-bottom:8px;font-weight:600;}
+.t-item p{font-size:13px;color:#6a5a90;line-height:1.8;font-weight:300;}
+/* STATS ROW */
+.stats-row{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    gap:20px;margin:36px 0 60px;
+}
+.stat-box{
+    background:var(--glass);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:28px 20px;
+    text-align:center;
+    backdrop-filter:blur(8px);
+    transition:0.3s;
+}
+.stat-box:hover{
+    border-color:var(--purple);
+    box-shadow:0 0 25px rgba(160,32,240,0.12);
+    transform:translateY(-3px);
+}
+.stat-box .num{
+    font-family:'Playfair Display',serif;
+    font-size:34px;font-weight:900;
+    background:linear-gradient(90deg,var(--purple),var(--cyan));
+    -webkit-background-clip:text;color:transparent;
+    display:block;margin-bottom:6px;
+}
+.stat-box .lbl{font-size:11px;color:#6a5a90;letter-spacing:1px;text-transform:uppercase;}
+/* AWS FUTURE SERVICES */
+.services-future{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:18px;margin:32px 0;
+}
+.sf-item{
+    background:var(--glass);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:24px 20px;
+    backdrop-filter:blur(8px);transition:0.3s;
+}
+.sf-item:hover{
+    border-color:var(--cyan);
+    box-shadow:0 0 20px rgba(0,234,255,0.08);
+    transform:translateY(-3px);
+}
+.sf-item span{font-size:28px;margin-bottom:10px;display:block;}
+.sf-item h4{font-size:14px;font-weight:600;color:white;margin-bottom:8px;}
+.sf-item p{font-size:12px;color:#5a5080;line-height:1.7;font-weight:300;}
+/* CURSOR */
+.cursor{
+    position:fixed;width:8px;height:8px;
+    background:var(--purple);border-radius:50%;
+    pointer-events:none;
+    box-shadow:0 0 6px var(--purple),0 0 12px var(--purple),0 0 20px var(--purple);
+    transform:translate(-50%,-50%);z-index:9999;
+}
+.spark{
+    position:fixed;width:4px;height:4px;
+    background:var(--purple);border-radius:50%;
+    pointer-events:none;
+    box-shadow:0 0 8px var(--purple);
+    animation:fade 0.5s linear forwards;z-index:9998;
+}
+@keyframes fade{to{opacity:0;transform:translateY(-10px);}}
+</style>
+</head>
+<body>
+<div class="cursor"></div>
+<div class="video-bg">
+    <video autoplay muted loop playsinline>
+        <source src="bg.mp4" type="video/mp4">
+    </video>
+</div>
+<div class="video-overlay"></div>
+
+<div class="page">
+    <header>
+        <div class="logo">&#10024; AWS CloudVerse</div>
+        <a href="index.html" class="back-btn">&#8592; Back to Home</a>
+    </header>
+
+    <div class="hero">
+        <div class="hero-badge">The Road Ahead</div>
+        <h1>Future Applications of Cloud Computing</h1>
+        <p>Cloud computing is not just infrastructure — it is the foundational platform upon which the next generation of technology will be built, from AI to quantum computing to smart cities and beyond.</p>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-row">
+        <div class="stat-box">
+            <span class="num">$1.2T</span>
+            <span class="lbl">Cloud Market by 2028</span>
+        </div>
+        <div class="stat-box">
+            <span class="num">95%</span>
+            <span class="lbl">Workloads in Cloud by 2030</span>
+        </div>
+        <div class="stat-box">
+            <span class="num">75B+</span>
+            <span class="lbl">IoT Devices by 2026</span>
+        </div>
+        <div class="stat-box">
+            <span class="num">1ms</span>
+            <span class="lbl">Edge Computing Latency</span>
+        </div>
+    </div>
+
+    <!-- FUTURE DOMAINS -->
+    <div class="section-title">Emerging Application Domains</div>
+    <div class="domain-grid">
+
+        <div class="domain-card">
+            <span class="domain-icon">&#129302;</span>
+            <span class="tag tag-ai">Artificial Intelligence</span>
+            <h3>AI & Machine Learning at Scale</h3>
+            <p>Cloud is the engine powering the AI revolution — enabling training of trillion-parameter models that would be impossible on-premise.</p>
+            <ul>
+                <li>Real-time natural language processing for 100M+ users</li>
+                <li>Autonomous vehicle perception systems on AWS Inferentia</li>
+                <li>Drug discovery via protein folding simulations</li>
+                <li>Generative AI applications (images, video, code)</li>
+                <li>Federated learning with privacy-preserving computation</li>
+            </ul>
+        </div>
+
+        <div class="domain-card">
+            <span class="domain-icon">&#128154;</span>
+            <span class="tag tag-health">Digital Healthcare</span>
+            <h3>Cloud-Powered Medicine</h3>
+            <p>Healthcare is being transformed by cloud — from genomics analysis to remote surgery, the hospital of the future runs on cloud infrastructure.</p>
+            <ul>
+                <li>Whole genome sequencing in under 30 minutes</li>
+                <li>AI-powered radiology and pathology diagnostics</li>
+                <li>Remote patient monitoring via IoT wearables</li>
+                <li>Predictive epidemiology and pandemic modeling</li>
+                <li>Digital twins of human organs for drug testing</li>
+            </ul>
+        </div>
+
+        <div class="domain-card">
+            <span class="domain-icon">&#127981;</span>
+            <span class="tag tag-iot">Smart Cities & IoT</span>
+            <h3>Intelligent Urban Infrastructure</h3>
+            <p>Cities of the future will run on billions of connected sensors feeding real-time data into cloud platforms that optimize every system.</p>
+            <ul>
+                <li>Adaptive traffic management reducing congestion by 40%</li>
+                <li>Smart grid energy distribution via predictive analytics</li>
+                <li>Autonomous public transport coordination</li>
+                <li>Real-time environmental monitoring and alerts</li>
+                <li>Cloud-managed emergency response systems</li>
+            </ul>
+        </div>
+
+        <div class="domain-card">
+            <span class="domain-icon">&#127758;</span>
+            <span class="tag tag-edge">Edge Computing</span>
+            <h3>Processing at the Frontier</h3>
+            <p>AWS Wavelength and AWS Outposts bring cloud processing to the very edge — within milliseconds of where data is generated.</p>
+            <ul>
+                <li>Factory automation with sub-1ms response times</li>
+                <li>Augmented reality overlays synchronized globally</li>
+                <li>Battlefield intelligence for defense applications</li>
+                <li>Retail checkout-free stores with computer vision</li>
+                <li>Sports analytics processed courtside in real-time</li>
+            </ul>
+        </div>
+
+        <div class="domain-card">
+            <span class="domain-icon">&#9883;</span>
+            <span class="tag tag-quantum">Quantum Computing</span>
+            <h3>Post-Classical Computing</h3>
+            <p>AWS Braket brings quantum computing to the cloud — enabling organizations to experiment with quantum algorithms without building hardware.</p>
+            <ul>
+                <li>Cryptography and post-quantum security protocols</li>
+                <li>Molecular simulation for materials science</li>
+                <li>Portfolio optimization beyond classical limits</li>
+                <li>Logistics routing for global supply chains</li>
+                <li>Climate modeling at unprecedented resolution</li>
+            </ul>
+        </div>
+
+        <div class="domain-card">
+            <span class="domain-icon">&#128752;</span>
+            <span class="tag tag-space">Space & Aerospace</span>
+            <h3>Computing Beyond Earth</h3>
+            <p>AWS Ground Station enables satellite data processing directly in the cloud — the infrastructure for the space economy runs on AWS.</p>
+            <ul>
+                <li>Satellite imagery analysis for agriculture and climate</li>
+                <li>Space debris tracking with ML-powered prediction</li>
+                <li>Deep space mission telemetry processing</li>
+                <li>Rocket launch optimization via digital twins</li>
+                <li>Global internet coverage via LEO satellite constellations</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="section-title">Cloud Evolution Timeline</div>
+    <div class="timeline">
+        <div class="t-item">
+            <div class="t-year">2025 — Now</div>
+            <h3>Generative AI Infrastructure</h3>
+            <p>Massive GPU clusters power LLM training and inference at global scale. AWS Bedrock democratizes access to foundation models. Every application gains AI capabilities.</p>
+        </div>
+        <div class="t-item">
+            <div class="t-year">2026 — Near Term</div>
+            <h3>Sovereign & Multi-Cloud Maturity</h3>
+            <p>Governments operate sovereign cloud regions. Multi-cloud strategies become standard. AWS Outposts deploy to remote and classified environments worldwide.</p>
+        </div>
+        <div class="t-item">
+            <div class="t-year">2027–2029 — Mid Term</div>
+            <h3>Quantum-Classical Hybrid Computing</h3>
+            <p>Quantum processing units work alongside classical cloud compute for specific optimization problems. Financial, pharmaceutical, and logistics industries see first real quantum advantage.</p>
+        </div>
+        <div class="t-item">
+            <div class="t-year">2030 — Long Term</div>
+            <h3>Ambient Intelligence Infrastructure</h3>
+            <p>Cloud becomes invisible infrastructure — embedded in everything from clothing to vehicles to buildings. Autonomous systems self-manage and self-heal without human intervention.</p>
+        </div>
+        <div class="t-item">
+            <div class="t-year">2035+ — Vision</div>
+            <h3>Planetary-Scale Cloud Networks</h3>
+            <p>Cloud infrastructure spanning Earth and orbital stations. Brain-computer interfaces stream cognition-assist AI from the cloud. Digital-physical reality merges seamlessly.</p>
+        </div>
+    </div>
+
+    <!-- AWS FUTURE SERVICES -->
+    <div class="section-title">AWS Services Powering the Future</div>
+    <div class="services-future">
+        <div class="sf-item">
+            <span>&#129302;</span>
+            <h4>AWS Bedrock</h4>
+            <p>Build generative AI applications using foundation models from Anthropic, Meta, Mistral, and more — no ML expertise required.</p>
+        </div>
+        <div class="sf-item">
+            <span>&#9883;</span>
+            <h4>AWS Braket</h4>
+            <p>Explore quantum algorithms and run hybrid quantum-classical workloads on real quantum hardware from IonQ, Rigetti, and OQC.</p>
+        </div>
+        <div class="sf-item">
+            <span>&#128225;</span>
+            <h4>AWS Wavelength</h4>
+            <p>Deploy ultra-low latency applications at the 5G edge — single-digit millisecond latency for mobile users and IoT devices.</p>
+        </div>
+        <div class="sf-item">
+            <span>&#128752;</span>
+            <h4>AWS Ground Station</h4>
+            <p>Control satellites and ingest data directly into AWS — process satellite imagery and telemetry without building ground infrastructure.</p>
+        </div>
+        <div class="sf-item">
+            <span>&#128694;</span>
+            <h4>AWS IoT Greengrass</h4>
+            <p>Extend AWS to edge devices — run Lambda functions and ML inference locally even when connectivity is intermittent.</p>
+        </div>
+        <div class="sf-item">
+            <span>&#128104;&#8205;&#127891;</span>
+            <h4>Amazon HealthLake</h4>
+            <p>HIPAA-compliant data lake for health data — ingest, store, and analyze years of health records to power clinical AI at scale.</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+const cursor = document.querySelector(".cursor");
+document.addEventListener("mousemove", e => {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+    let spark = document.createElement("div");
+    spark.className = "spark";
+    spark.style.left = e.clientX + "px";
+    spark.style.top = e.clientY + "px";
+    document.body.appendChild(spark);
+    setTimeout(() => spark.remove(), 500);
+});
+document.querySelectorAll('.domain-card,.stat-box,.sf-item,.t-item').forEach((el,i)=>{
+    el.style.opacity='0';
+    el.style.transform='translateY(24px)';
+    el.style.transition='opacity 0.5s ease, transform 0.5s ease';
+    setTimeout(()=>{
+        el.style.opacity='1';
+        el.style.transform='translateY(0)';
+    }, 80 + i*55);
+});
+</script>
+</body>
+</html>
